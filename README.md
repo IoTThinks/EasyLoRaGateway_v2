@@ -12,7 +12,7 @@ From top
 From bottom
 ![easy lora gw 4](https://user-images.githubusercontent.com/29994971/50210453-c2da8280-03a8-11e9-86e1-85d0f9f97176.jpg)
 
-From inside
+From inside (2-chip version)
 ![easy lora gw 3](https://user-images.githubusercontent.com/29994971/50210456-c4a44600-03a8-11e9-9652-def4faf8427f.jpg)
 
 ## 2. Software feature (In progress)
