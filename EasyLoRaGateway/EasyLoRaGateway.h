@@ -21,6 +21,7 @@ unsigned int reset_times;
 #define ETH_PHY_POWER 33 // LAN_RST, too
 #define ETH_PHY_TYPE ETH_PHY_LAN8720
 #define ETH_CLK_MODE ETH_CLOCK_GPIO17_OUT
+//#define LAN_RST   33
 
 // Must be after #define
 #include <ETH.h>
@@ -45,8 +46,8 @@ unsigned int reset_times;
 #define LORA_RST  13
 
 // LoRa signals
-#define LORA_SF 7
-#define LORA_CR 4 //4/5
+#define LORA_SF 12 // 7 is the fastest. 12 is is farthest
+#define LORA_CR 5
 #define LORA_BW 125E3
 #define LORA_PREAMBLE_LENGTH  8
 
