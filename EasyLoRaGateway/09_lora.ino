@@ -12,11 +12,6 @@ void setupLoRa() {
   
   SPI.begin(LORA_SCK, LORA_MISO, LORA_MOSI, LORA_SS);
   LoRa.setPins(LORA_SS, LORA_RST, LORA_DIO012);
-  LoRa.setSpreadingFactor(LORA_SF);
-  LoRa.setCodingRate4(LORA_CR); //4/5
-  LoRa.setSignalBandwidth(LORA_BW);
-  LoRa.setPreambleLength(LORA_PREAMBLE_LENGTH);
-  delay(1000);
   
   while (!LoRa.begin(433E6)) {
     Serial.println("[LoRa] Starting LoRa failed!");    
@@ -24,6 +19,13 @@ void setupLoRa() {
     delay(1000);
   }
 
+  LoRa.setSpreadingFactor(LORA_SF);
+  LoRa.setCodingRate4(LORA_CR);
+  LoRa.setSignalBandwidth(LORA_BW);
+  LoRa.setPreambleLength(LORA_PREAMBLE_LENGTH);
+  LoRa.enableCrc();
+
+  Serial.println("[LoRa] LoRa started OK!");
   LORA_Status = "OK";
 }
 
