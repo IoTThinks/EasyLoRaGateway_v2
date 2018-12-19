@@ -1,4 +1,3 @@
-
 // Include required EasyLoraGateway libraries
 #include "EasyLoRaGateway.h"
 
@@ -12,8 +11,7 @@ void setup() {
    //setupLED();  
    setupSerial();
    setupSpeaker();
-   onOffSpeaker(1, false);
-
+   onOffSpeaker(1, false);   
    //setupFileSystem();
    setupEthernet();
    //delay(1000);
