@@ -15,7 +15,7 @@ From bottom
 From inside
 ![easy lora gw 3](https://user-images.githubusercontent.com/29994971/50210456-c4a44600-03a8-11e9-9652-def4faf8427f.jpg)
 
-## 2. Software Feature (In progress)
+## 2. Software feature (In progress)
 - Single or dual channel LoRa gateway
 - Simple local management portal
 - Auto provision of Easy LoRa Plug and Node
