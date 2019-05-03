@@ -8,6 +8,27 @@ WiFiServer webServer(80);
 char linebuf[80];
 int charcount=0;
 
+//HTML Webserver
+String responseHTML = ""
+  "<!DOCTYPE HTML><html><head>"
+  "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"></head>"
+  "<body style=\"background-color:lightblue;\">"
+  "<h1>Easy LoRa Gateway</h1>"
+  "<h2>1. Basic Information</h2>"
+  "<p>LAN Status: " + ETH_Status + "</p>"
+  "<p>LoRa Status: " + LORA_Status + "</p>"
+  "<p>MQTT Status: " + MQTT_Status + "</p>"
+  "<p>OTA Status: " + OTA_Status + "</p>"
+  "<p>Reset Status: " + String(reset_times) + " times</p>"
+  "<h2>2. Gateway Activities</h2>"
+  "<p>Last Received Lora Message: " + LORA_Lastreceived_Msg + "</p>"
+  "<p>Last Forwarded MQTT Message: " + MQTT_Lastsent_Msg + "</p>"
+  "<h2>3. Configuration</h2>"
+  "<p>LED <a href=\"ledon\"><button>ON</button></a>&nbsp;<a href=\"ledoff\"><button>OFF</button></a></p>"
+  "<p>OTA <a href=\"otaon\"><button>ON</button></a>&nbsp;<a href=\"otaoff\"><button>OFF</button></a></p>"
+  "</body>"
+  "</html>";
+  
 void setupWebServer() {
   // Can not get if starts OK
   webServer.begin();
@@ -40,24 +61,7 @@ void runWebServer() {
           webClient.println("Content-Type: text/html");
           webClient.println("Connection: close");  // the connection will be closed after completion of the response
           webClient.println();
-          webClient.println("<!DOCTYPE HTML><html><head>");
-          webClient.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"></head>");
-          webClient.println("<body style=\"background-color:lightblue;\">");
-          webClient.println("<h1>Easy LoRa Gateway</h1>");
-          webClient.println("<h2>1. Basic Information</h2>");
-          webClient.println("<p>LAN Status: " + ETH_Status + "</p>");
-          webClient.println("<p>LoRa Status: " + LORA_Status + "</p>");
-          webClient.println("<p>MQTT Status: " + MQTT_Status + "</p>");
-          webClient.println("<p>OTA Status: " + OTA_Status + "</p>");
-          webClient.println("<p>Reset Status: " + String(reset_times) + " times</p>");
-          webClient.println("<h2>2. Gateway Activities</h2>");
-          webClient.println("<p>Last Received Lora Message: " + LORA_Lastreceived_Msg + "</p>");
-          webClient.println("<p>Last Forwarded MQTT Message: " + MQTT_Lastsent_Msg + "</p>");
-          webClient.println("<h2>3. Configuration</h2>");
-          webClient.println("<p>LED <a href=\"ledon\"><button>ON</button></a>&nbsp;<a href=\"ledoff\"><button>OFF</button></a></p>");
-          webClient.println("<p>OTA <a href=\"otaon\"><button>ON</button></a>&nbsp;<a href=\"otaoff\"><button>OFF</button></a></p>");
-          webClient.println("</body>");
-          webClient.println("</html>");
+          webClient.println(responseHTML);
           break;
         }
         if (c == '\n') {

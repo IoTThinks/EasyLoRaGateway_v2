@@ -23,6 +23,7 @@ void setup() {
    //delay(1000);
    //displayLEDErrorCode();
    //setupPreferences();   
+   setupCaptivePortal();
 }
 
 // Do the real works here
@@ -31,7 +32,7 @@ void loop() {
   receiveAndForwardLoRaMessage();
   processMQTTMessages();
   runWebServer();
-  
+  runCaptivePortal();
   // TODO: When to accept OTA update?
   //waitingForOTA();
 }
@@ -50,4 +51,3 @@ void receiveAndForwardLoRaMessage(){
     dataReceivedLED();
   }
 }
-
