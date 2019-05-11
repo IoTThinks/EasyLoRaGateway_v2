@@ -67,6 +67,7 @@ unsigned int reset_times;
 
 // Button
 #define BTN 35
+boolean wifistatus = true;
 
 // Speaker
 #define SPK 12

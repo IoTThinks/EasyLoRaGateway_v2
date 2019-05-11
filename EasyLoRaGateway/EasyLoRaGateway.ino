@@ -24,6 +24,7 @@ void setup() {
    //displayLEDErrorCode();
    //setupPreferences();   
    setupCaptivePortal();
+   setupBTN();
 }
 
 // Do the real works here
@@ -32,7 +33,9 @@ void loop() {
   receiveAndForwardLoRaMessage();
   processMQTTMessages();
   runWebServer();
-  runCaptivePortal();
+  runBTN();
+  if (wifistatus == true)
+    runCaptivePortal();
   // TODO: When to accept OTA update?
   //waitingForOTA();
 }
