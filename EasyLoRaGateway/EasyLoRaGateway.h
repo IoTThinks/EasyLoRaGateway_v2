@@ -74,3 +74,49 @@ boolean wifistatus = true;
 #define SPK_CHANNEL 0
 #define SPK_FREQ  800
 #define SPK_RESOLUTION  8
+
+//wifi
+#include <WiFi.h>
+#include <DNSServer.h>
+String WEBSERVER_Status = "Not Initialized";
+WiFiServer webServer(80);
+WiFiClient webClient = webServer.available();
+
+//GUI
+String GUI_LoRaEvents = "";
+String GUI_SenssorEvents = "";
+String GUI_PowerEvents = "";
+
+//HTML
+String statusHTML = ""
+"<!DOCTYPE html>"
+"<html>"
+"<head>"
+"<title>Easy Lora Gateway</title>"
+"<style type=\"text/css\"> .header { padding: 24px; text-align: center; background: #58c3ef; color: white; font-size: 20px; } .topnav { background-color: #333; overflow: hidden; } .topnav a { float: left; color: #f2f2f2; text-align: center; padding: 14px 16px; text-decoration: none; font-size: 17px; } .topnav a:hover { background-color: #ddd; color: black; } .topnav a.active { background-color: #58c3ef; color: white; } .btn { background-color: DodgerBlue; border: none; color: white; padding: 12px 30px; cursor: pointer; font-size: 20px; } .btn:hover { background-color: RoyalBlue; } </style>"
+"</head>"
+"<body>"
+"<div class=\"header\">"
+"<h1>Easy Lora Gateway</h1>"
+"</div>"
+"<div class=\"topnav\"> <a class=\"active\" href=\"#Status\">Status</a> <a href=\"#nSensor\">Sensor</a> <a href=\"#Power\">Power</a> <a href=\"#Setting\">Setting</a> </div>"
+"<p><b>Overview</b><br></p>"
+"<p>ID: 1</p>"
+"<p>LAN IP:   191.68.10.10</p>"
+"<p>Internet: Connected / Disconnected</p>"
+"<p>MQTT: Connected / Disconnected<br></p>"
+"<p><b>LoRa events</b></p>"
+"<p>" + GUI_LoRaEvents + "<br></p>"
+"<p><b>Sensor events</b></p>"
+"<p>" + GUI_SenssorEvents + "<br></p>"
+"<p><b>Power events</b></p>"
+"<p>" + GUI_PowerEvents + "<br></p>"
+"<button class=\"btn\" value=\"Refresh\" onClick=\"window.location.reload();\">Refresh</button>"
+"</body>"
+"</html>";
+
+String sensorHTML ="<!DOCTYPE html> <html> <head> <title>Easy Lora Gateway</title> <style type=\"text/css\"> .header { padding: 24px; text-align: center; background: #58c3ef; color: white; font-size: 20px; } /* Add a black background color to the top navigation */ .topnav { background-color: #333; overflow: hidden; } /* Style the links inside the navigation bar */ .topnav a { float: left; color: #f2f2f2; text-align: center; padding: 14px 16px; text-decoration: none; font-size: 17px; } /* Change the color of links on hover */ .topnav a:hover { background-color: #ddd; color: black; } /* Add a color to the active/current link */ .topnav a.active { background-color: #58c3ef; color: white; } /* Style buttons */ .btn { background-color: DodgerBlue; border: none; color: white; padding: 12px 30px; cursor: pointer; font-size: 20px; } /* Darker background on mouse-over */ .btn:hover { background-color: RoyalBlue; } .row { display: flex; } .column { flex: 50%; } </style> </head> <body> <div class=\"header\"> <h1>Easy Lora Gateway</h1> </div> <div class=\"topnav\"> <a href=\"#Status\">Status</a> <a class=\"active\" href=\"#Sensor\">Sensor</a> <a href=\"#Power\">Power</a> <a href=\"#Setting\">Setting</a> </div> <p><b>RS485 Sensor</b></p> <div class=\"row\"> <div class=\"column\"> <p>Register address (in Hex)</p> <p>Data length (in bytes)</p> </div> <div class=\"column\"> <br> <input type=\"text\" name=\"RegisterAddress\"><br> <br><input type=\"text\" name=\"Data Lenght\"> </div> </div> <button class=\"btn\" value=\"Save\" onClick=\"SaveGUIRS485Sensor();\">Save</button> </body> </html>";
+
+String powerHTML ="<!DOCTYPE html> <html> <head> <title>Easy Lora Gateway</title> <style type=\"text/css\"> .header { padding: 24px; text-align: center; background: #58c3ef; color: white; font-size: 20px; } /* Add a black background color to the top navigation */ .topnav { background-color: #333; overflow: hidden; } /* Style the links inside the navigation bar */ .topnav a { float: left; color: #f2f2f2; text-align: center; padding: 14px 16px; text-decoration: none; font-size: 17px; } /* Change the color of links on hover */ .topnav a:hover { background-color: #ddd; color: black; } /* Add a color to the active/current link */ .topnav a.active { background-color: #58c3ef; color: white; } /* Style buttons */ .btn { background-color: DodgerBlue; border: none; color: white; padding: 12px 30px; cursor: pointer; font-size: 20px; } /* Darker background on mouse-over */ .btn:hover { background-color: RoyalBlue; } </style> </head> <body> <div class=\"header\"> <h1>Easy Lora Gateway</h1> </div> <div class=\"topnav\"> <a href=\"#Status\">Status</a> <a href=\"#Sensor\">Sensor</a> <a class=\"active\" href=\"#Power\">Power</a> <a href=\"#Setting\">Setting</a> </div> <p>Select Power mode and click Save</p> <form> <select name = \"dropdown\"> <option value = \"Automatic\" selected>Automatic</option> <option value = \"Force ON\">Force ON</option> <option value = \"Force OFF\">Force OFF</option> </select> </form> <button class=\"btn\" value=\"\" onClick=\"SaveGUIPower(string mode);\">Save</button> </div> </body> </html>";
+
+String settingHTML ="<!DOCTYPE html> <html> <head> <title>Easy Lora Gateway</title> <style type=\"text/css\"> .header { padding: 24px; text-align: center; background: #58c3ef; color: white; font-size: 20px; } /* Add a black background color to the top navigation */ .topnav { background-color: #333; overflow: hidden; } /* Style the links inside the navigation bar */ .topnav a { float: left; color: #f2f2f2; text-align: center; padding: 14px 16px; text-decoration: none; font-size: 17px; } /* Change the color of links on hover */ .topnav a:hover { background-color: #ddd; color: black; } /* Add a color to the active/current link */ .topnav a.active { background-color: #58c3ef; color: white; } /* Style buttons */ .btn { background-color: DodgerBlue; border: none; color: white; padding: 12px 30px; cursor: pointer; font-size: 20px; } /* Darker background on mouse-over */ .btn:hover { background-color: RoyalBlue; } .row { display: flex; } .column { flex: 50%; } </style> </head> <body> <div class=\"header\"> <h1>Easy Lora Gateway</h1> </div> <div class=\"topnav\"> <a href=\"#Status\">Status</a> <a href=\"#Sensor\">Sensor</a> <a href=\"#Power\">Power</a> <a class=\"active\" href=\"#Setting\">Setting</a> </div> <div class=\"row\"> <div class=\"column\"> <p>ID</p> <p>Secret</p> </div> <div class=\"column\"> <br> <input type=\"text\" name=\"ID\"><br> <br><input type=\"text\" name=\"Secret\"> </div> </div> <button class=\"btn\" value=\"Save\" onClick=\"SaveGUISettings(string id, string secret) ;\">Save</button> </body> </html>";

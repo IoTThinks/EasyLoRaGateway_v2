@@ -1,8 +1,9 @@
 // Provide Web GUI to manage the gateway
 // https://randomnerdtutorials.com/esp32-web-server-arduino-ide/
 // Global variables
-String WEBSERVER_Status = "Not Initialized";
+/*String WEBSERVER_Status = "Not Initialized";
 WiFiServer webServer(80);
+WiFiClient webClient = webServer.available();*/
 
 // Client variables 
 char linebuf[80];
@@ -38,7 +39,7 @@ void setupWebServer() {
 
 void runWebServer() {
   // listen for incoming clients
-  WiFiClient webClient = webServer.available();
+ // WiFiClient webClient = webServer.available();
   if (webClient) {
     Serial.println("[WEBSERVER] New webClient");
     memset(linebuf,0,sizeof(linebuf));
