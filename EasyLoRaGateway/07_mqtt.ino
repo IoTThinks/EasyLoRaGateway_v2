@@ -25,10 +25,11 @@ void setupMQTT() {
 }
 
 void connectToMQTT() {
-  while (!eth_connected) {
-    Serial.println("[MQTT] ETH not connected. Try to reconnect ETH shortly.");
+  while (!wifi_connected) {
+    Serial.println("[MQTT] ETH and WiFi not connected. Try to reconnect ETH and WiFi shortly.");
     delay(5000);
     setupEthernet();    
+    setupWiFi();
   }
 
   while (!mqttClient.connect(mqttNamespace, mqttUsername, mqttSecret)) {

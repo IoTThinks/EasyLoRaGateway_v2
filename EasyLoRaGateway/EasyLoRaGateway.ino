@@ -8,21 +8,29 @@
 // The delay is not neccessary and just to avoid component re-initizalized by other compopents.
 // setupXXX functions are placed in module files
 void setup() {     
-   //setupLED();  
-   setupSerial();
-   setupSpeaker();
-   onOffSpeaker(1, false);   
-   //setupFileSystem();
-   setupEthernet();
-   //delay(1000);
-   setupMQTT();
-   setupLoRa();   
-   setupWebServer();
-   //delay(10000);
-   //setupOTA();
-   //delay(1000);
-   //displayLEDErrorCode();
-   //setupPreferences();   
+
+  //pinMode(0, OUTPUT);
+  //digitalWrite(0, HIGH);
+   
+  //pinMode(2, OUTPUT);
+  //digitalWrite(2, HIGH);
+   
+  //setupLED();  
+  setupSerial();
+  setupSpeaker();
+  onOffSpeaker(1, false);   
+  //setupFileSystem();
+  setupWiFi();
+  //setupEthernet();
+  //delay(1000);
+  setupMQTT();
+  setupLoRa();   
+  setupWebServer();
+  //delay(10000);
+  //setupOTA();
+  //delay(1000);
+  //displayLEDErrorCode();
+  //setupPreferences();   
 }
 
 // Do the real works here

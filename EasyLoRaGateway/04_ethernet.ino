@@ -10,11 +10,11 @@ String ETH_hostname;
 
 void setupEthernet()
 {
-    WiFi.onEvent(WiFiEvent);
+    WiFi.onEvent(EthernetEvent);
     ETH.begin();
 }
 
-void WiFiEvent(WiFiEvent_t event)
+void EthernetEvent(WiFiEvent_t event)
 {
   switch (event) {
     case SYSTEM_EVENT_ETH_START:

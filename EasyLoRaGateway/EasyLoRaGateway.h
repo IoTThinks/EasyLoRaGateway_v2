@@ -73,3 +73,9 @@ unsigned int reset_times;
 #define SPK_CHANNEL 0
 #define SPK_FREQ  800
 #define SPK_RESOLUTION  8
+
+// WiFi
+#include <WiFi.h>
+const char* ssid     = "Optimum 2.4";
+const char* password = "Password123;";
+static bool wifi_connected = false;
