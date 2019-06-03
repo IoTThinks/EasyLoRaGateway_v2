@@ -28,7 +28,7 @@ void connectToMQTT() {
   while (!wifi_connected) {
     Serial.println("[MQTT] ETH and WiFi not connected. Try to reconnect ETH and WiFi shortly.");
     delay(5000);
-    setupEthernet();    
+    //setupEthernet();    
     setupWiFi();
   }
 

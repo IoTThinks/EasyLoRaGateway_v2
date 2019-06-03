@@ -76,6 +76,8 @@ unsigned int reset_times;
 
 // WiFi
 #include <WiFi.h>
+#include "soc/soc.h"
+#include "soc/rtc_cntl_reg.h"
 const char* ssid     = "Optimum 2.4";
 const char* password = "Password123;";
 static bool wifi_connected = false;

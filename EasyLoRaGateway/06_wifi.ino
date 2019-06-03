@@ -28,6 +28,9 @@ void WiFiEvent(WiFiEvent_t event)
 
 void setupWiFi()
 {
+    //disable brownout detector
+    WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
+    
     // delete old config
     WiFi.disconnect(true);
     delay(1000);
