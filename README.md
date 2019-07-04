@@ -40,3 +40,9 @@ From inside (2-chip version)
 ## 4. Pin mappings
 Pin mappings from modules to main ESP32
 ![image](https://user-images.githubusercontent.com/29994971/50145382-04552a00-02e4-11e9-8f4d-fa9508a38ff0.png)
+
+Pinout of RA-01
+![image](https://user-images.githubusercontent.com/29994971/60634264-8fd57900-9e38-11e9-8ed0-cd51df3bb879.png)
+
+Pinout of ESP32
+![image](https://user-images.githubusercontent.com/29994971/60634413-07a3a380-9e39-11e9-86dd-2acc5d586cae.png)
